@@ -128,8 +128,10 @@ La unificación de proyectos no solo consistió en juntar archivos, sino en resp
 
 Este repositorio documenta un proceso real de aprendizaje donde se aplicaron:
 
+```
 -Módulos encapsulados
 -Debugging seguro
 -Scroll easing
 -Buenas prácticas en Git
 -Integración visual escalable
+```
