@@ -43,7 +43,7 @@ El objetivo principal de esta tarea fue **acoplar múltiples proyectos `HTML + C
 - ✅ Estética global aplicada en **escala de grises** con **bordes blancos** para pruebas de contraste.
 - ✅ Animación *fade-in suave al scrollear*, implementada con `IntersectionObserver`.
 - ✅ Carga y verificación de los `iframes` usando eventos `load` para debugging seguro.
-- ✅ Separación ordenada de archivos padre (`index`, `JS y CSS global`) en carpeta raíz, y calculadoras incrustadas en `/actividades`.
+- ✅ Separación ordenada de archivos padre (`index`, `JS y CSS global`) en carpeta raíz, y calculadoras incrustadas en/actividades`.
 
 ```
 ---
@@ -63,6 +63,8 @@ Esto permite que más adelante el padre pueda enviar datos a los scripts interno
 
 Usamos el listener principal DOMContentLoaded en el JS padre para activar la animación de aparición por secciones:
 
+```
+
 document.addEventListener("DOMContentLoaded", () => {
   const containers = document.querySelectorAll(".calc-container");
   const observer = new IntersectionObserver(entries => {
@@ -72,7 +74,11 @@ document.addEventListener("DOMContentLoaded", () => {
   containers.forEach(c => observer.observe(c));
 });
 
+```
+---
 4. Estilizado global no intrusivo
+
+```
 
 Se aplicó un CSS padre que controla solo la página contenedora, respetando los estilos propios de cada calculadora:
 
@@ -88,6 +94,7 @@ body {
   border-radius: 12px;
   transition: opacity 0.8s ease;
 }
+```
 
 5. Resolución de conflictos en Git
 
@@ -102,11 +109,13 @@ git push origin main tras sincronizar local con remoto.
 
 Cada calculadora se mantiene en la carpeta /actividades, y el index las incrusta así:
 
+```
 <section class="calc-container">
   <div class="calc-title">Recta Numérica</div>
   <iframe id="frameRecta" src="actividades/1-B_actividad_2_Angel_Lugo.html"></iframe>
 </section>
 
+```
 
 Los contenedores se apilan uno debajo de otro para navegación vertical intuitiva:
 
