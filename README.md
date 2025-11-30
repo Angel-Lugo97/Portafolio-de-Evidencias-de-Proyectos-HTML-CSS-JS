@@ -29,12 +29,12 @@ El objetivo principal de esta tarea fue **acoplar múltiples proyectos `HTML + C
 ---
 
 ## 📂 Estructura del proyecto
+```
 /
 ├─ index.html → Página principal
 ├─ calculadoras_unificadas.js
 ├─ calculadoras_unificadas.css
 └─ actividades/→ Contiene las 7 calculadoras HTML independientes
-/
 ---
 ## 🚀 ¿Qué se logró?
 
