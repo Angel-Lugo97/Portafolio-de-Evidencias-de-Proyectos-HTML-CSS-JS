@@ -7,7 +7,7 @@
 
 ## Grupo: B
 
-## Actividad #29. Portafolio de Evidencias de Proyectos HTML/CSS/JS
+## Actividad #19. Portafolio de Evidencias de Proyectos HTML/CSS/JS
 ## 📚 Índice
 
 1. [Logros del proyecto](#-qué-se-logró)
