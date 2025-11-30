@@ -1,0 +1,1271 @@
+<!DOCTYPE html> 
+<html lang="es"> 
+<head> 
+<meta charset="UTF-8"> 
+<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+<title>Visualizador de la Recta Numérica - Fundamentos de 
+Álgebra</title> 
+<style> 
+/* ==================== RESET BÁSICO Y TIPOGRAFÍA ==================== */ 
+* { 
+    margin: 0; 
+    padding: 0; 
+    box-sizing: border-box; 
+} 
+ 
+body { 
+    font-family: Arial, sans-serif; 
+    line-height: 1.4; 
+    background-color: grey; 
+    color: black    ; 
+    padding: 10px; 
+} 
+ 
+.container { 
+    max-width: 1200px; 
+    margin: 0 auto; 
+    border: 2px solid black; 
+    padding: 20px; 
+}
+/* ==================== ENCABEZADOS ==================== */ 
+h1 { 
+    font-size: 24px; 
+    margin-bottom: 10px; 
+    color: purple; 
+    text-align: center; 
+} 
+ 
+h2 { 
+    font-size: 18px; 
+    margin-bottom: 15px; 
+    color: black; 
+} 
+ 
+h3 { 
+    font-size: 16px; 
+    margin-bottom: 10px; 
+    color: black; 
+} 
+ 
+p { 
+    font-size: 14px; 
+    margin: 5px 0; 
+    text-align: center; 
+} 
+/* ==================== CONTROLES Y FORMULARIOS ==================== */ 
+.controls { 
+    border: 2px solid black; 
+    padding: 20px; 
+    margin-bottom: 20px; 
+} 
+ 
+.input-group { 
+    margin-bottom: 20px; 
+} 
+ 
+.input-group label { 
+    display: block; 
+    font-weight: bold; 
+    margin-bottom: 5px; 
+    color: black; 
+    background-color: grey;
+} 
+ 
+.input-group input { 
+    width: 300px; 
+    padding: 8px; 
+    border: 2px solid black; 
+    background-color: grey;
+    font-size: 14px; 
+    margin-bottom: 10px; 
+} 
+ 
+.input-group input:focus { 
+    outline: none; 
+    border-color: purple; 
+    background-color: grey; 
+}
+/* ==================== BOTONES ==================== */
+button {
+    padding: 10px 20px;
+    font-size: 14px;
+    font-weight: bold;
+    border: 2px solid black;
+    background-color: purple;
+    color: grey;
+    cursor: pointer;
+    margin-right: 10px;
+    margin-bottom: 5px;
+    border-radius: 8px; /* 🔵 Bordes redondeados */
+    transition: all 0.3s ease; /* 🔵 Transición suave */
+}
+
+button:hover {
+    background-color: black;
+    color: grey;
+    transform: scale(1.05); /* 🔵 Pequeño aumento al pasar el cursor */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* 🔵 Efecto sombra */
+}
+
+button:active {
+    transform: scale(0.97); /* 🔵 Efecto de hundimiento al hacer clic */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+/* ==================== NÚMEROS PREDEFINIDOS ==================== */ 
+.preset-btn {
+    padding: 5px 10px;
+    border: 2px solid black;
+    background-color: grey;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: bold;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+}
+
+.preset-btn:hover {
+    background-color: black;
+    color: grey;
+    transform: scale(1.05);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.25);
+}
+
+.preset-btn:active {
+    transform: scale(0.97);
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
+}
+/* ==================== RECTA NUMÉRICA ==================== */ 
+.number-line-container { 
+    border: 2px solid black; 
+    padding: 20px; 
+    margin-bottom: 20px; 
+} 
+ 
+.number-line-container h2 { 
+    font-size: 18px; 
+    margin-bottom: 15px; 
+    text-align: center; 
+    color: black; 
+} 
+ 
+.number-line { 
+    width: 100%; 
+    height: 100px; 
+    position: relative; 
+    background-color: grey; 
+    border: 1px solid black; 
+    margin: 20px 0; 
+} 
+ 
+.range-info { 
+    text-align: center; 
+    margin-top: 10px; 
+} 
+ 
+.range-info small { 
+    color: black; 
+    font-size: 12px; 
+}
+/* ==================== ELEMENTOS DE LA RECTA ==================== */ 
+.line { 
+    position: absolute; 
+    top: 48px; 
+    left: 5%; 
+    right: 5%; 
+    height: 4px; 
+    background-color: black; 
+} 
+ 
+.tick { 
+    position: absolute; 
+    width: 2px; 
+    height: 20px; 
+    background-color: black; 
+    top: 38px; 
+} 
+ 
+.tick-label { 
+    position: absolute; 
+    top: 65px; 
+    font-size: 12px; 
+    font-weight: bold; 
+    color: black; 
+    transform: translateX(-50%); 
+}
+/* ==================== PUNTOS EN LA RECTA ==================== */ 
+.number-point { 
+    position: absolute; 
+    width: 16px; 
+    height: 16px; 
+    top: 40px; 
+    transform: translateX(-50%); 
+    border: 2px solid black; 
+    cursor: pointer; 
+} 
+ 
+.number-point.naturals { 
+    background-color: red; 
+} 
+ 
+.number-point.integers { 
+    background-color: blue; 
+} 
+ 
+.number-point.rationals { 
+    background-color: green; 
+} 
+ 
+.number-point.irrationals { 
+    background-color: yellow; 
+} 
+ 
+.point-label { 
+    position: absolute; 
+    top: -25px; 
+    transform: translateX(-50%); 
+    background-color: grey; 
+    border: 1px solid black; 
+    padding: 2px 4px; 
+    font-size: 10px; 
+    font-weight: bold; 
+    white-space: nowrap; 
+}
+/* =================== PANELES DE INFORMACIÓN =================== */ 
+.info-panels { 
+    display: grid; 
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+    gap: 20px; 
+} 
+ 
+.classification-panel, .points-panel, .distance-calculator { 
+    border: 2px solid black; 
+    padding: 15px; 
+} 
+ 
+.classification-panel h3, .points-panel h3, .distance-calculator h3 { 
+    font-size: 16px; 
+    margin-bottom: 15px; 
+    color: black; 
+    border-bottom: 2px solid black; 
+    padding-bottom: 5px; 
+}
+/* ================== LEYENDA DE CLASIFICACIÓN ================== */ 
+.classification-legend { 
+    margin-bottom: 20px; 
+} 
+ 
+.legend-item { 
+    display: flex; 
+    align-items: center; 
+    gap: 10px; 
+    margin: 10px 0; 
+    padding: 5px; 
+} 
+ 
+.legend-color { 
+    width: 20px; 
+    height: 20px; 
+    border: 2px solid black; 
+} 
+ 
+.legend-color.naturals { 
+    background-color: red; 
+} 
+ 
+.legend-color.integers { 
+    background-color: blue; 
+} 
+ 
+.legend-color.rationals { 
+    background-color: green; 
+} 
+ 
+.legend-color.irrationals { 
+    background-color: yellow; 
+} 
+ 
+.classification-info h4 { 
+    font-size: 14px; 
+    margin: 15px 0 10px 0; 
+      color: black; 
+} 
+ 
+.classification-info ul { 
+    margin-left: 20px; 
+} 
+ 
+.classification-info li { 
+    margin: 5px 0; 
+    font-size: 12px; 
+} 
+ 
+/* ==================== LISTA DE PUNTOS ==================== */ 
+.points-list { 
+    min-height: 200px; 
+} 
+ 
+.empty-state p { 
+    font-size: 14px; 
+    color: black; 
+    text-align: center; 
+    margin: 20px 0; 
+} 
+ 
+.empty-state small { 
+    display: block; 
+    text-align: center; 
+    font-size: 12px; 
+    color: black; 
+} 
+ 
+.point-item { 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    padding: 10px; 
+    margin: 5px 0; 
+    border: 1px solid black; 
+}
+/* ================== CALCULADORA DE DISTANCIAS ================== */ 
+.calculator-description { 
+    margin-bottom: 15px; 
+    font-size: 13px; 
+    color: black; 
+    text-align: left; 
+} 
+ 
+.distance-inputs { 
+    margin-bottom: 20px; 
+} 
+ 
+.distance-field { 
+    margin-bottom: 15px; 
+} 
+ 
+.distance-field label { 
+    display: block; 
+    font-weight: bold; 
+    margin-bottom: 5px; 
+    color: black; 
+} 
+ 
+.custom-select { 
+    position: relative; 
+    width: 100%; 
+} 
+ 
+.select-selected { 
+    padding: 8px 30px 8px 10px; 
+    border: 2px solid black; 
+     background-color: grey; 
+    cursor: pointer; 
+    font-size: 14px; 
+} 
+ 
+.select-selected:after { 
+    content: "▼"; 
+    position: absolute; 
+    right: 10px; 
+    top: 50%; 
+    transform: translateY(-50%); 
+    font-size: 10px; 
+} 
+ 
+.select-items { 
+    position: absolute; 
+    top: 100%; 
+    left: 0; 
+    right: 0; 
+    background-color: grey; 
+    border: 2px solid black; 
+    border-top: none; 
+    z-index: 1000; 
+    max-height: 150px; 
+    overflow-y: auto; 
+    display: none; 
+} 
+ 
+.select-items.show { 
+    display: block; 
+} 
+ 
+.select-items div { 
+    padding: 8px 10px; 
+    cursor: pointer; 
+    border-bottom: 1px solid black; 
+    font-size: 13px; 
+}
+.select-items div:hover { 
+    background-color: grey; 
+    color: grey; 
+} 
+ 
+.distance-btn { 
+    width: 100%; 
+    padding: 12px; 
+    background-color: purple; 
+    color: grey; 
+    border: 2px solid purple; 
+    font-size: 14px; 
+    font-weight: bold; 
+    cursor: pointer; 
+    margin-bottom: 15px; 
+} 
+ 
+.distance-placeholder { 
+    text-align: center; 
+    padding: 20px; 
+    border: 1px solid black; 
+} 
+ 
+.distance-result { 
+    padding: 15px; 
+    border: 2px solid purple; 
+    background-color: grey; 
+    font-size: 14px; 
+    text-align: center; 
+} 
+ 
+/* ==================== RESPONSIVE ==================== */ 
+@media (max-width: 768px) { 
+    .container { 
+        margin: 5px; 
+    } 
+     
+    .input-group input { 
+        width: 100%;
+        max-width: 300px; 
+} 
+.info-panels { 
+grid-template-columns: 1fr; 
+} 
+}
+</style> 
+</head> 
+
+<body> 
+<div class="container"> 
+<h1>Visualizador de la Recta Numérica</h1> 
+<p>• Tecnológico de Software • Fundamentos de algebra  •</p> 
+<p>1-B Angel Abraham Lugo Saenz</p>
+<p>Profesor:Jorge Javier Pedroza Romero</p>
+<section class="controls"> 
+<h2>Controles de Entrada</h2> 
+<div class="input-group"> 
+<label for="numberInput">Valor del número:</label> 
+<input type="text" id="numberInput"  
+placeholder="Ej: sqrt(7), 2*π, √2, 1/3"> 
+<button type="button" onclick="addNumber()"> 
+Agregar Número 
+</button> 
+<button type="button" onclick="clearAll()"> 
+Limpiar Todo 
+</button> 
+</div> 
+</section>
+
+</div> 
+<div class="preset-section"> 
+    <h3>Números Predefinidos</h3> 
+    <p>Haz clic en cualquier número para agregarlo automáticamente:</p> 
+     
+    <div class="preset-numbers"> 
+        <span class="preset-btn" onclick="addPresetNumber('π')">π</span> 
+        <span class="preset-btn" onclick="addPresetNumber('e')">e</span> 
+        <span class="preset-btn" onclick="addPresetNumber('√2')">√2</span> 
+        <span class="preset-btn" onclick="addPresetNumber('√3')">√3</span> 
+        <span class="preset-btn" onclick="addPresetNumber('φ')">φ</span> 
+        <span class="preset-btn" 
+onclick="addPresetNumber('1/3')">1/3</span> 
+        <span class="preset-btn" 
+onclick="addPresetNumber('-1/2')">-1/2</span> 
+        <span class="preset-btn" 
+onclick="addPresetNumber('2.5')">2.5</span> 
+        <span class="preset-btn" 
+onclick="addPresetNumber('-√2')">-√2</span> 
+        <span class="preset-btn" 
+onclick="addPresetNumber('2*π')">2*π</span> 
+    </div> 
+</div>
+<section class="number-line-container"> 
+<h2>Recta Numérica Interactiva</h2> 
+<div class="number-line" id="numberLine"> 
+<!-- Los elementos de la recta se generan dinámicamente con 
+JavaScript --> 
+</div> 
+<p class="range-info"> 
+<small>Rango de visualización: -10 a +10 (números fuera de 
+este rango no se mostrarán)</small> 
+<section class="info-panels"> 
+    <!-- Panel de clasificación de conjuntos numéricos --> 
+    <div class="classification-panel"> 
+        <h3>Clasificación de Conjuntos Numéricos</h3> 
+        <div class="classification-legend"> 
+            <div class="legend-item"> 
+                <div class="legend-color naturals"></div> 
+                <span><strong>ℕ - Naturales:</strong> {1, 2, 3, 4, 
+...}</span> 
+            </div> 
+            <div class="legend-item"> 
+                <div class="legend-color integers"></div> 
+                <span><strong>ℤ - Enteros:</strong> {..., -2, -1, 0, 
+1, 2, ...}</span> 
+            </div> 
+            <div class="legend-item"> 
+                <div class="legend-color rationals"></div> 
+                <span><strong>ℚ - Racionales:</strong> Fracciones y 
+decimales finitos/periódicos</span> 
+            </div> 
+            <div class="legend-item"> 
+                <div class="legend-color irrationals"></div> 
+                <span><strong>ℝ-ℚ - Irracionales:</strong> π, e, √2, 
+decimales infinitos no periódicos</span> 
+            </div> 
+        </div> 
+         
+        <div class="classification-info"> 
+            <h4>Propiedades importantes:</h4> 
+            <ul> 
+                <li><strong>ℕ ⊂ ℤ:</strong> Todo número natural es 
+entero</li> 
+                <li><strong>ℤ ⊂ ℚ:</strong> Todo entero puede 
+escribirse como fracción</li>
+              <li><strong>ℚ ∪ (ℝ-ℚ) = ℝ:</strong> Los reales son 
+la unión de racionales e irracionales</li> 
+                <li><strong>ℚ ∩ (ℝ-ℚ) = ∅:</strong> No existen 
+números que sean ambos</li> 
+            </ul> 
+        </div> 
+    </div> 
+     <!-- Panel de lista de puntos --> 
+    <div class="points-panel"> 
+        <h3>Puntos en la Recta</h3> 
+        <div id="pointsList"> 
+            <div class="empty-state"> 
+                <p>Agrega números para ver su clasificación 
+automática aquí</p> 
+                <small>Los puntos aparecerán ordenados de menor a 
+mayor</small> 
+            </div> 
+        </div> 
+    </div> 
+     <!-- Panel calculadora de distancias --> 
+    <div class="distance-calculator"> 
+        <h3>Calculadora de Distancias</h3> 
+        <p class="calculator-description"> 
+            Selecciona dos puntos para calcular la distancia entre 
+ellos en la recta numérica. 
+        </p> 
+         
+        <div class="distance-inputs"> 
+            <div class="distance-field"> 
+                  <label>Punto A:</label> 
+                <div class="custom-select" id="pointA-container"> 
+                    <div class="select-selected" 
+id="pointA-selected">Selecciona un punto</div> 
+                    <div class="select-items" id="pointA-items"> 
+                        <div data-value="">Selecciona un punto</div> 
+                    </div> 
+                </div> 
+            </div> 
+ 
+            <div class="distance-field"> 
+                <label>Punto B:</label> 
+                <div class="custom-select" id="pointB-container"> 
+                    <div class="select-selected" 
+id="pointB-selected">Selecciona un punto</div> 
+                    <div class="select-items" id="pointB-items"> 
+                        <div data-value="">Selecciona un punto</div> 
+                    </div> 
+                </div> 
+            </div> 
+        </div> 
+ 
+        <button type="button" class="distance-btn" 
+onclick="calculateDistance()"> 
+            Calcular Distancia 
+        </button> 
+         
+        <div id="distanceResult"> 
+            <div class="distance-placeholder"> 
+                <div><strong>Calculadora de Distancias</strong></div> 
+                <div>Los resultados aparecerán aquí</div> 
+            </div> 
+        </div> 
+    </div> 
+</section> 
+</p> 
+</section>
+<script> 
+/* ==================== VARIABLES GLOBALES ==================== */ 
+let points = []; 
+let currentRange = 10; 
+ 
+/* ==================== CONSTANTES MATEMÁTICAS ==================== 
+*/ 
+const CONSTANTS = { 
+    // Constantes básicas 
+    'π': Math.PI, 
+    'pi': Math.PI, 
+    'e': Math.E, 
+     
+    // Número áureo (phi) 
+    'φ': (1 + Math.sqrt(5)) / 2, 
+    'phi': (1 + Math.sqrt(5)) / 2, 
+     
+    // Tau (2π) 
+    'τ': 2 * Math.PI, 
+    'tau': 2 * Math.PI, 
+     
+    // Logaritmos naturales 
+    'ln2': Math.LN2, 
+    'ln10': Math.LN10, 
+     
+    // Raíces cuadradas comunes 
+    '√2': Math.sqrt(2), 
+    '√3': Math.sqrt(3), 
+    '√5': Math.sqrt(5), 
+    '√7': Math.sqrt(7), 
+    '√8': Math.sqrt(8), 
+    '√10': Math.sqrt(10), 
+    '√11': Math.sqrt(11), 
+    '√12': Math.sqrt(12), 
+    '√13': Math.sqrt(13), 
+'√15': Math.sqrt(15), 
+'√17': Math.sqrt(17), 
+'√19': Math.sqrt(19), 
+'√20': Math.sqrt(20), 
+// Raíces cuadradas negativas 
+'-√2': -Math.sqrt(2), 
+'-√3': -Math.sqrt(3), 
+'-√5': -Math.sqrt(5) 
+}; 
+console.log('Variables y constantes inicializadas correctamente'); 
+/* =========== FUNCIÓN PARA CONVERTIR TEXTO EN NÚMERO =========== */ 
+function parseNumber(input) { 
+    // Limpiar el input de espacios en blanco 
+    input = input.trim().replace(/\s+/g, ''); 
+ 
+    // Verificar si es una constante matemática directa 
+    if (CONSTANTS.hasOwnProperty(input)) { 
+        return CONSTANTS[input]; 
+    } 
+ 
+    // Reemplazar constantes matemáticas en la expresión 
+    let processedInput = input; 
+    for (const [symbol, value] of Object.entries(CONSTANTS)) { 
+        // Crear expresión regular para reemplazar el símbolo 
+        const regex = new 
+RegExp(symbol.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'g'); 
+        processedInput = processedInput.replace(regex, 
+value.toString()); 
+    } 
+ 
+    // Manejar fracciones simples (sin otros operadores) 
+    if (input.includes('/') && !input.includes('*') && 
+!input.includes('+') && !input.includes('-', 1)) { 
+        const parts = input.split('/'); 
+        if (parts.length === 2) { 
+            const numerator = parseFloat(parts[0]); 
+            const denominator = parseFloat(parts[1]); 
+             
+            // Verificar que ambos son números válidos y denominador no es cero 
+            if (!isNaN(numerator) && !isNaN(denominator) && 
+denominator !== 0) { 
+                return numerator / denominator; } 
+        } 
+    } 
+ 
+    // Manejar raíces cuadradas básicas con símbolo √ 
+    if (input.startsWith('√') && !input.includes('*') && 
+!input.includes('+') && !input.includes('-', 1)) { 
+        const radicand = parseFloat(input.slice(1)); 
+        if (!isNaN(radicand) && radicand >= 0) { 
+            return Math.sqrt(radicand); 
+        } 
+    } 
+ 
+    // Manejar raíces cuadradas negativas 
+    if (input.startsWith('-√') && !input.includes('*') && 
+!input.includes('+')) { 
+        const radicand = parseFloat(input.slice(2)); 
+        if (!isNaN(radicand) && radicand >= 0) { 
+            return -Math.sqrt(radicand); 
+        } 
+    } 
+ 
+    // Manejar función sqrt() con cualquier expresión dentro 
+    if (input.includes('sqrt(')) { 
+        const match = input.match(/sqrt\(([^)]+)\)/); 
+        if (match) { 
+            const innerExpression = match[1]; 
+            let innerValue; 
+             
+            try { 
+                // Para fracciones simples dentro de sqrt() 
+                if (innerExpression.includes('/') && 
+!innerExpression.includes('*') &&  
+                    !innerExpression.includes('+') && 
+!innerExpression.includes('-', 1)) { 
+                    const parts = innerExpression.split('/'); 
+                    if (parts.length === 2) { 
+                        const num = parseFloat(parts[0]); 
+                        const den = parseFloat(parts[1]); 
+                         if (!isNaN(num) && !isNaN(den) && den !== 0) 
+{ 
+                            innerValue = num / den; 
+                        } 
+                    } 
+                } else { 
+                    // Para otras expresiones, evaluar directamente 
+                    const safeChars = /^[0-9+\-*/.() ]+$/; 
+                    if (safeChars.test(innerExpression)) { 
+                        innerValue = Function('"use strict"; return (' + innerExpression + ')')(); 
+                    } else { 
+                        innerValue = parseFloat(innerExpression); 
+                    } 
+                } 
+                 
+                // Si el valor interno es válido, calcular su raíz 
+cuadrada 
+                if (!isNaN(innerValue) && innerValue >= 0) { 
+                    return Math.sqrt(innerValue); 
+                } 
+            } catch (e) { 
+                // Si falla la evaluación, continuar con el flujo 
+normal 
+            } 
+        } 
+    } 
+ 
+    // Evaluar expresiones matemáticas más complejas 
+    try { 
+        // Reemplazar operadores por equivalentes de JavaScript 
+        processedInput = processedInput.replace(/\^/g, '**'); // 
+Potencias 
+ 
+        // Verificar que solo contiene caracteres seguros para 
+evaluar 
+        const safeChars = /^[0-9+\-*/.() ]+$/; 
+        if (safeChars.test(processedInput)) { 
+            const result = Function('"use strict"; return (' + processedInput + ')')(); 
+            if (typeof result === 'number' && !isNaN(result) && 
+isFinite(result)) { 
+                return result; 
+            } 
+        } 
+    } catch (e) { 
+        // Si falla la evaluación, continuar con el parsing normal 
+    } 
+ 
+    // Intentar parsear como número decimal normal 
+    const num = parseFloat(processedInput); 
+    if (!isNaN(num)) { 
+        return num; 
+    } 
+ 
+    // Si nada funcionó, retornar null 
+    return null; 
+}
+/* ==================== FUNCIONES DE CLASIFICACIÓN 
+==================== */ 
+function classifyNumber(num, originalInput) { 
+    // Verificar si es un número natural (entero positivo) 
+    if (num > 0 && Number.isInteger(num)) { 
+        return 'naturals'; 
+    } 
+     
+    // Verificar si es un número entero 
+    if (Number.isInteger(num)) { 
+        return 'integers'; 
+    } 
+     
+    // Lista de constantes irracionales conocidas 
+    const irrationalConstants = [ 
+        'π', 'pi', 'e', 'φ', 'phi', 'τ', 'tau', 'ln2', 'ln10',  
+        '√2', '√3', '√5', '√7', '√8', '√10', '√11', '√12', '√13', 
+'√15', '√17', '√19', '√20', 
+        '-√2', '-√3', '-√5' 
+    ]; 
+     
+    // Si es una constante irracional directa 
+    if (irrationalConstants.includes(originalInput)) { 
+        return 'irrationals'; 
+    } 
+     
+    // Verificar si contiene sqrt() y clasificar según el contenido 
+    if (originalInput.includes('sqrt(')) { 
+        const sqrtMatch = originalInput.match(/sqrt\(([^)]+)\)/); 
+        if (sqrtMatch) { 
+            const innerExpression = sqrtMatch[1]; 
+            let innerValue;try { 
+                // Evaluar lo que está dentro del sqrt() 
+                if (innerExpression.includes('/')) { 
+                    // Fracción simple 
+                    const parts = innerExpression.split('/'); 
+                    if (parts.length === 2) { 
+                        const num = parseFloat(parts[0]); 
+                        const den = parseFloat(parts[1]); 
+                        if (!isNaN(num) && !isNaN(den) && den !== 0) 
+{ 
+                            innerValue = num / den; 
+                        } 
+                    } 
+                } else { 
+                    // Número simple 
+                    innerValue = parseFloat(innerExpression); 
+                } 
+                 
+                if (!isNaN(innerValue) && innerValue >= 0) { 
+                    const sqrtResult = Math.sqrt(innerValue); 
+                     
+                    // Verificar si es un cuadrado perfecto 
+                    if (Number.isInteger(sqrtResult)) { 
+                        // Es cuadrado perfecto 
+                        if (sqrtResult > 0) { 
+                            return 'naturals'; 
+                        } else if (sqrtResult === 0) { 
+                            return 'integers'; 
+                        } 
+                    } else { 
+                        // No es cuadrado perfecto, es irracional 
+                        return 'irrationals'; 
+                    } 
+                } 
+            } catch (e) { 
+                // Si hay error en la evaluación, asumir que es 
+irracional 
+                return 'irrationals'; 
+            }
+    } 
+    } 
+     
+    // Verificar si contiene símbolo √ y no es cuadrado perfecto 
+    if (originalInput.includes('√')) { 
+        return 'irrationals'; 
+    } 
+     
+    // Analizar expresiones con operaciones matemáticas 
+    if (originalInput.includes('*') || originalInput.includes('+') ||  
+        originalInput.includes('-') || originalInput.includes('/')) { 
+         
+        // Lista de símbolos irracionales para detectar en 
+expresiones 
+        const irrationalSymbols = ['π', 'pi', 'e', 'φ', 'phi', 'τ', 
+'tau', 'ln2', 'ln10', '√', 'sqrt']; 
+         
+        // Verificar si la expresión contiene números irracionales 
+        const containsIrrationals = irrationalSymbols.some(symbol => 
+originalInput.includes(symbol)); 
+         
+        if (containsIrrationals) { 
+            // Casos especiales donde operaciones con irracionales pueden dar resultado racional 
+            const specialRationalCases = [ 
+                // Casos como π/π = 1, e/e = 1 
+                /π\/π/, /pi\/pi/, /e\/e/, /φ\/φ/, /phi\/phi/, 
+/τ\/τ/, /tau\/tau/, 
+                /√2\/√2/, /√3\/√3/, /√5\/√5/, 
+                 
+                // Casos como π - π = 0 
+                /π-π/, /pi-pi/, /e-e/, /φ-φ/, /phi-phi/, 
+                 
+                // Otros casos especiales 
+                /2\*π\/τ/, /τ\/2\*π/ 
+            ]; 
+             
+            const isSpecialRational = 
+specialRationalCases.some(pattern =>pattern.test(originalInput.replace(/\s/g, '')) 
+            ); 
+             
+            if (isSpecialRational) { 
+                if (num > 0 && Number.isInteger(num)) { 
+                    return 'naturals'; 
+                } 
+                if (Number.isInteger(num)) { 
+                    return 'integers'; 
+                } 
+                return 'rationals'; 
+            } 
+             
+            // Si contiene irracionales y no es caso especial, es 
+irracional 
+            return 'irrationals'; 
+        } 
+    } 
+     
+    // Verificar si es una fracción simple (racional) 
+    if (originalInput.includes('/')) { 
+        return 'rationals'; 
+    } 
+     
+    // Si es decimal, asumimos que es racional a menos que se especifique lo contrario 
+    return 'rationals'; 
+} 
+ 
+function getClassificationName(classification) { 
+    const names = { 
+        'naturals': 'ℕ (Naturales)', 
+        'integers': 'ℤ (Enteros)',  
+        'rationals': 'ℚ (Racionales)', 
+        'irrationals': 'ℝ-ℚ (Irracionales)' 
+    }; 
+    return names[classification] || 'No clasificado'; 
+}
+/* ==================== FUNCIONES DE INTERFAZ DE USUARIO ==================== */ 
+function addNumber() { 
+    const input = document.getElementById('numberInput').value; 
+     
+    if (!input) { 
+        alert('Por favor ingresa un número'); 
+        return; 
+    } 
+     
+    const value = parseNumber(input); 
+    if (value === null) { 
+        alert('Formato de número no válido. Ejemplos válidos: sqrt(7), 2*π, 1/e, √2, -1/2'); 
+        return; 
+    } 
+     
+    if (Math.abs(value) > currentRange) { 
+        alert(`El número está fuera del rango actual 
+(-${currentRange} a ${currentRange}). El rango se puede modificar en 
+el código.`); 
+        return; 
+    } 
+     
+    // Verificar si el punto ya existe (con tolerancia para errores de punto flotante) 
+    const existingPoint = points.find(p => Math.abs(p.value - value) 
+< 0.0001); 
+    if (existingPoint) { 
+        alert('Este número ya está en la recta numérica'); 
+        return; 
+    } 
+     
+    // Clasificar el número y agregarlo al array         
+            const classification = classifyNumber(value, input); 
+     
+    points.push({ 
+        value: value, 
+        originalInput: input, 
+        classification: classification 
+    }); 
+     
+    // Limpiar el input y actualizar la visualización 
+    document.getElementById('numberInput').value = ''; 
+    updateDisplay(); 
+     
+    console.log(`Número agregado: ${input} = ${value} 
+(${classification})`); 
+} 
+ 
+function addPresetNumber(input) { 
+    const value = parseNumber(input); 
+     
+    if (value === null || Math.abs(value) > currentRange) { 
+        alert(`El número ${input} está fuera del rango actual`); 
+        return; 
+    } 
+     
+    // Verificar si el punto ya existe 
+    const existingPoint = points.find(p => Math.abs(p.value - value) 
+< 0.0001); 
+    if (existingPoint) { 
+        alert('Este número ya está en la recta numérica'); 
+        return; 
+    } 
+     
+    // Clasificar el número y agregarlo 
+    const classification = classifyNumber(value, input); 
+     
+    points.push({ 
+        value: value, 
+        originalInput: input, 
+        classification: classification
+         }); 
+     
+    // Actualizar la visualización 
+    updateDisplay(); 
+     
+    console.log(`Número predefinido agregado: ${input} = ${value} 
+(${classification})`); 
+} 
+ 
+function clearAll() { 
+    points = []; 
+    updateDisplay(); 
+    console.log('Todos los puntos eliminados'); 
+} 
+ 
+function updateDisplay() { 
+    drawNumberLine(); 
+    updatePointsList(); 
+    updateDistanceSelectors(); 
+}
+/* ==================== FUNCIONES DE VISUALIZACIÓN 
+==================== */ 
+function drawNumberLine() { 
+    const numberLine = document.getElementById('numberLine'); 
+    numberLine.innerHTML = ''; 
+     
+    // Crear la línea base de la recta 
+    const line = document.createElement('div'); 
+    line.className = 'line'; 
+    numberLine.appendChild(line); 
+     
+    // Crear marcas de graduación 
+    const tickCount = currentRange * 2 + 1; // De -range a +range 
+    for (let i = 0; i < tickCount; i++) { 
+        const value = -currentRange + i; 
+        const percentage = (i / (tickCount - 1)) * 90 + 5; // 5% de margen a cada lado 
+         
+        // Crear la marca vertical 
+        const tick = document.createElement('div'); 
+        tick.className = 'tick'; 
+        tick.style.left = percentage + '%'; 
+        numberLine.appendChild(tick); 
+         
+        // Crear la etiqueta numérica 
+        const label = document.createElement('div'); 
+        label.className = 'tick-label'; 
+        label.style.left = percentage + '%'; 
+        label.textContent = value; 
+        numberLine.appendChild(label); 
+    } 
+     
+    // Agregar los puntos de números agregados 
+    points.forEach((point, index) => { const percentage = ((point.value + currentRange) / (2 * 
+currentRange)) * 90 + 5; 
+         
+        // Crear el elemento visual del punto 
+        const pointElement = document.createElement('div'); 
+        pointElement.className = `number-point 
+${point.classification}`; 
+        pointElement.style.left = percentage + '%'; 
+        pointElement.draggable = false; 
+         
+        // Crear la etiqueta del punto 
+        const pointLabel = document.createElement('div'); 
+        pointLabel.className = 'point-label'; 
+        pointLabel.textContent = `${point.originalInput} ≈ 
+${point.value.toFixed(3)}`; 
+        pointElement.appendChild(pointLabel); 
+         
+        // Agregar evento de clic para eliminar 
+        pointElement.onclick = () => removePoint(index); 
+        pointElement.title = `${point.originalInput} 
+(${getClassificationName(point.classification)})\nHaz clic para 
+eliminar`; 
+         
+        numberLine.appendChild(pointElement); 
+    }); 
+} 
+ 
+function removePoint(index) { 
+    if (confirm('¿Deseas eliminar este punto?')) { 
+        const removedPoint = points.splice(index, 1)[0]; 
+        updateDisplay(); 
+        console.log(`Punto eliminado: 
+${removedPoint.originalInput}`); 
+    } 
+} 
+ 
+function updatePointsList() { 
+    const pointsList = document.getElementById('pointsList');
+    // Si no hay puntos, mostrar mensaje informativo 
+    if (points.length === 0) { 
+        pointsList.innerHTML = ` 
+            <div class="empty-state"> 
+                <p>Agrega números para ver su clasificación 
+automática aquí</p> 
+                <small>Los puntos aparecerán ordenados de menor a 
+mayor</small> 
+            </div> 
+        `; 
+        return; 
+    } 
+     
+    // Ordenar puntos por valor de menor a mayor 
+    const sortedPoints = [...points].sort((a, b) => a.value - 
+b.value); 
+     
+    // Generar HTML para cada punto 
+    pointsList.innerHTML = sortedPoints.map(point => ` 
+        <div class="point-item" style="border-left: 4px solid 
+${getClassificationColor(point.classification)}"> 
+            <div> 
+                <strong>${point.originalInput}</strong> ≈ 
+${point.value.toFixed(6)} 
+                <br> 
+                
+<small>${getClassificationName(point.classification)}</small> 
+            </div> 
+            <div style="text-align: right;"> 
+                <small>Posición: ${point.value.toFixed(3)}</small> 
+            </div> 
+        </div> 
+    `).join(''); 
+} 
+ 
+function getClassificationColor(classification) { 
+    const colors = { 
+        'naturals': '#e74c3c',    // Rojo 
+        'integers': '#3498db',    // Azul   
+        'rationals': '#27ae60',   // Verde 
+'irrationals': '#f1c40f'  // Amarillo 
+}; 
+return colors[classification] || '#95a5a6'; 
+} 
+/* ==================== CALCULADORA DE DISTANCIAS 
+==================== */ 
+function updateDistanceSelectors() { 
+    const pointAItems = document.getElementById('pointA-items'); 
+    const pointBItems = document.getElementById('pointB-items'); 
+    const pointASelected = 
+document.getElementById('pointA-selected'); 
+    const pointBSelected = 
+document.getElementById('pointB-selected'); 
+     
+    // Limpiar las opciones existentes 
+    pointAItems.innerHTML = '<div data-value="">Selecciona un punto</div>'; 
+    pointBItems.innerHTML = '<div data-value="">Selecciona un punto</div>'; 
+     
+    // Resetear el texto seleccionado si no hay puntos 
+    if (points.length === 0) { 
+        pointASelected.textContent = 'Selecciona un punto'; 
+        pointBSelected.textContent = 'Selecciona un punto'; 
+        
+document.getElementById('pointA-container').setAttribute('data-value'
+ , ''); 
+        
+document.getElementById('pointB-container').setAttribute('data-value'
+ , ''); 
+        return; 
+    } 
+     
+    // Agregar cada punto como opción en ambos selectores 
+    points.forEach((point, index) => { 
+        const optionText = `${point.originalInput} 
+(${point.value.toFixed(3)})`;
+   // Crear opción para el selector A 
+        const optionA = document.createElement('div'); 
+        optionA.setAttribute('data-value', index); 
+        optionA.textContent = optionText; 
+        optionA.onclick = () => selectPoint('A', index, optionText); 
+        pointAItems.appendChild(optionA); 
+         
+        // Crear opción para el selector B 
+        const optionB = document.createElement('div'); 
+        optionB.setAttribute('data-value', index); 
+        optionB.textContent = optionText; 
+        optionB.onclick = () => selectPoint('B', index, optionText); 
+        pointBItems.appendChild(optionB); 
+    }); 
+} 
+ 
+function selectPoint(selector, index, text) { 
+    document.getElementById(`point${selector}-selected`).textContent 
+= text; 
+    
+document.getElementById(`point${selector}-container`).setAttribute('data-value', index);
+ 
+document.getElementById(`point${selector}-items`).classList.remove('s how'); 
+} 
+ 
+function calculateDistance() { 
+    const pointAValue = 
+document.getElementById('pointA-container').getAttribute('data-value'
+ ); 
+    const pointBValue = 
+document.getElementById('pointB-container').getAttribute('data-value'
+ ); 
+    const resultDiv = document.getElementById('distanceResult'); 
+ 
+    // Verificar que ambos puntos estén seleccionados 
+    if (!pointAValue || !pointBValue) {
+        resultDiv.innerHTML = '<div style="color: #dc3545; text-align: center; padding: 15px;">Selecciona ambos puntos para calcular la distancia</div>'; 
+        return; 
+    } 
+ 
+    // Verificar que los puntos sean diferentes 
+    if (pointAValue === pointBValue) { 
+        resultDiv.innerHTML = '<div style="color: #dc3545; text-align: center; padding: 15 px;">Selecciona dos puntos diferentes</div>'; 
+        return; 
+    } 
+ 
+    // Obtener los puntos seleccionados 
+    const pointA = points[parseInt(pointAValue)]; 
+    const pointB = points[parseInt(pointBValue)]; 
+     
+    // Calcular la distancia como valor absoluto de la diferencia 
+    const distance = Math.abs(pointA.value - pointB.value); 
+ 
+    // Mostrar el resultado formateado 
+    resultDiv.innerHTML = ` 
+        <div class="distance-result"> 
+            <strong>Distancia entre ${pointA.originalInput} y 
+${pointB.originalInput}:</strong><br> 
+            <strong>d(a,b) = |${pointA.value.toFixed(3)} - 
+${pointB.value.toFixed(3)}| = ${distance.toFixed(6)} 
+unidades</strong> 
+        </div> 
+    `; 
+     
+    console.log(`Distancia calculada: |${pointA.value} - 
+${pointB.value}| = ${distance}`); 
+} 
+ 
+/* ==================== EVENT LISTENERS Y INICIALIZACIÓN ==================== */
+// Event listener para detectar Enter en el input de números 
+document.getElementById('numberInput').addEventListener('keypress', 
+function(e) { 
+    if (e.key === 'Enter') { 
+        addNumber(); 
+    } 
+}); 
+ 
+// Event listeners para manejar los dropdowns personalizados 
+document.getElementById('pointA-selected').onclick = function(e) { 
+    e.stopPropagation(); 
+    const items = document.getElementById('pointA-items'); 
+    const isOpen = items.classList.contains('show'); 
+     
+    // Cerrar todos los dropdowns primero 
+    document.querySelectorAll('.select-items').forEach(item => { 
+        item.classList.remove('show'); 
+    }); 
+     
+    // Alternar el estado del dropdown clickeado 
+    if (!isOpen) { 
+        items.classList.add('show'); 
+    } 
+}; 
+ 
+document.getElementById('pointB-selected').onclick = function(e) { 
+    e.stopPropagation(); 
+    const items = document.getElementById('pointB-items'); 
+    const isOpen = items.classList.contains('show'); 
+     
+    // Cerrar todos los dropdowns primero 
+    document.querySelectorAll('.select-items').forEach(item => { 
+        item.classList.remove('show'); 
+    }); 
+     
+    // Alternar el estado del dropdown clickeado 
+    if (!isOpen) { 
+        items.classList.add('show'); 
+    }
+    }; 
+// Cerrar dropdowns al hacer clic fuera de ellos 
+document.addEventListener('click', function(e) { 
+if (!e.target.closest('.custom-select')) { 
+document.querySelectorAll('.select-items').forEach(item => { 
+item.classList.remove('show'); 
+}); 
+} 
+}); 
+// Inicializar la aplicación 
+console.log('Aplicación inicializada correctamente'); 
+updateDisplay();
+</script>
+</body> 
+</html>
