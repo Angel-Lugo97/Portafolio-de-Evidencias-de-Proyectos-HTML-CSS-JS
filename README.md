@@ -45,6 +45,7 @@ El objetivo principal de esta tarea fue **acoplar múltiples proyectos `HTML + C
 - ✅ Carga y verificación de los `iframes` usando eventos `load` para debugging seguro.
 - ✅ Separación ordenada de archivos padre (`index`, `JS y CSS global`) en carpeta raíz, y calculadoras incrustadas en `/actividades`.
 
+```
 ---
 
 ## 🧠 Aprendizajes clave
