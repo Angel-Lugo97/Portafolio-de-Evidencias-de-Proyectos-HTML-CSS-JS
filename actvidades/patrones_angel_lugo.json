@@ -1,0 +1,365 @@
+{
+  "patterns": [
+    {
+      "id": 1,
+      "natural": "La suma de {var1} y {var2}",
+      "algebraic": "{var1} + {var2}",
+      "category": "operaciones_basicas"
+    },
+    {
+      "id": 2,
+      "natural": "La resta de {var1} y {var2}",
+      "algebraic": "{var1} - {var2}",
+      "category": "operaciones_basicas"
+    },
+    {
+      "id": 3,
+      "natural": "El producto de {var1} y {var2}",
+      "algebraic": "{var1} × {var2}",
+      "category": "operaciones_basicas"
+    },
+    {
+      "id": 4,
+      "natural": "{var1} dividido por {var2}",
+      "algebraic": "{var1} ÷ {var2}",
+      "category": "operaciones_basicas"
+    },
+    {
+      "id": 5,
+      "natural": "La diferencia entre el cuadrado de {var1} y el cuadrado de {var2}",
+      "algebraic": "{var1}^2 - {var2}^2",
+      "category": "combinadas"
+    },
+    {
+      "id": 6,
+      "natural": "La {var1} es igual al producto de la {var2} y la {var3}",
+      "algebraic": "{var1} = {var2} × {var3}",
+      "category": "física"
+    },
+    {
+      "id": 7,
+      "natural": "La raíz cuadrada de {var1}",
+      "algebraic": "√{var1}",
+      "category": "potencias_raíces"
+    },
+    {
+      "id": 8,
+      "natural": "{var1} elevado a la {var2}",
+      "algebraic": "{var1}^{var2}",
+      "category": "potencias_raíces"
+    },
+    {
+      "id": 9,
+      "natural": "La raíz {var2}-ésima de {var1}",
+      "algebraic": "√[{var2}]{var1}",
+      "category": "potencias_raíces"
+    },
+    {
+      "id": 10,
+      "natural": "El valor absoluto de {var1}",
+      "algebraic": "|{var1}|",
+      "category": "otros"
+    },
+    {
+      "id": 11,
+      "natural": "La función {var1} evaluada en {var2}",
+      "algebraic": "{var1}({var2})",
+      "category": "funciones"
+    },
+    {
+      "id": 12,
+      "natural": "La función {var1} compuesta con {var2} evaluada en {var3}",
+      "algebraic": "{var1}({var2}({var3}))",
+      "category": "funciones"
+    },
+    {
+      "id": 13,
+      "natural": "El promedio de {var1}, {var2} y {var3}",
+      "algebraic": "({var1} + {var2} + {var3}) ÷ 3",
+      "category": "otros"
+    },
+    {
+      "id": 14,
+      "natural": "La suma de los valores desde {var1} hasta {var2}",
+      "algebraic": "∑ desde {var1} hasta {var2}",
+      "category": "sumatorias"
+    },
+    {
+      "id": 15,
+      "natural": "El producto de los valores desde {var1} hasta {var2}",
+      "algebraic": "∏ desde {var1} hasta {var2}",
+      "category": "productorias"
+    },
+    {
+      "id": 16,
+      "natural": "La derivada de {var1} con respecto a {var2}",
+      "algebraic": "d{var1}/d{var2}",
+      "category": "calculo"
+    },
+    {
+      "id": 17,
+      "natural": "La segunda derivada de {var1} con respecto a {var2}",
+      "algebraic": "d²{var1}/d{var2}²",
+      "category": "calculo"
+    },
+    {
+      "id": 18,
+      "natural": "La derivada parcial de {var1} con respecto a {var2}",
+      "algebraic": "∂{var1}/∂{var2}",
+      "category": "calculo"
+    },
+    {
+      "id": 19,
+      "natural": "La integral indefinida de {var1} con respecto a {var2}",
+      "algebraic": "∫{var1} d{var2}",
+      "category": "calculo"
+    },
+    {
+      "id": 20,
+      "natural": "La integral definida de {var1} desde {var2} hasta {var3}",
+      "algebraic": "∫[{var2},{var3}] {var1} d{var4}",
+      "category": "calculo"
+    },
+    {
+      "id": 21,
+      "natural": "El límite de {var1} cuando {var2} tiende a {var3}",
+      "algebraic": "lim {var2}→{var3} {var1}",
+      "category": "calculo"
+    },
+    {
+      "id": 22,
+      "natural": "El límite lateral de {var1} cuando {var2} tiende a {var3} por la derecha",
+      "algebraic": "lim {var2}→{var3}⁺ {var1}",
+      "category": "calculo"
+    },
+    {
+      "id": 23,
+      "natural": "El límite lateral de {var1} cuando {var2} tiende a {var3} por la izquierda",
+      "algebraic": "lim {var2}→{var3}⁻ {var1}",
+      "category": "calculo"
+    },
+    {
+      "id": 24,
+      "natural": "La pendiente de la recta tangente a la curva {var1} en {var2}",
+      "algebraic": "{var1}'({var2})",
+      "category": "calculo"
+    },
+    {
+      "id": 25,
+      "natural": "El área bajo la curva {var1} desde {var2} hasta {var3}",
+      "algebraic": "∫[{var2},{var3}] {var1} d{var4}",
+      "category": "calculo"
+    },
+    {
+      "id": 26,
+      "natural": "La función compuesta de {var1} y {var2}",
+      "algebraic": "({var1} ∘ {var2})(x)",
+      "category": "precalculo"
+    },
+    {
+      "id": 27,
+      "natural": "La inversa de la función {var1}",
+      "algebraic": "{var1}⁻¹(x)",
+      "category": "precalculo"
+    },
+    {
+      "id": 28,
+      "natural": "La función exponencial de base {var1} elevada a {var2}",
+      "algebraic": "{var1}^{var2}",
+      "category": "precalculo"
+    },
+    {
+      "id": 29,
+      "natural": "El logaritmo en base {var1} de {var2}",
+      "algebraic": "log_{var1}({var2})",
+      "category": "precalculo"
+    },
+    {
+      "id": 30,
+      "natural": "La función seno de {var1}",
+      "algebraic": "sin({var1})",
+      "category": "precalculo"
+    },
+    {
+      "id": 31,
+      "natural": "La función coseno de {var1}",
+      "algebraic": "cos({var1})",
+      "category": "precalculo"
+    },
+    {
+      "id": 32,
+      "natural": "La función tangente de {var1}",
+      "algebraic": "tan({var1})",
+      "category": "precalculo"
+    },
+    {
+      "id": 33,
+      "natural": "La identidad trigonométrica: seno cuadrado de {var1} más coseno cuadrado de {var1}",
+      "algebraic": "sin²({var1}) + cos²({var1}) = 1",
+      "category": "precalculo"
+    },
+    {
+      "id": 34,
+      "natural": "El valor de {var1} cuando {var2} tiende al infinito",
+      "algebraic": "lim {var2}→∞ {var1}",
+      "category": "calculo"
+    },
+    {
+      "id": 35,
+      "natural": "El crecimiento o decrecimiento de la función {var1} según su derivada",
+      "algebraic": "{var1}'(x) > 0 → creciente; {var1}'(x) < 0 → decreciente",
+      "category": "calculo"
+    },
+    {
+      "id": 36,
+      "natural": "La velocidad es igual a la distancia dividida por el tiempo",
+      "algebraic": "v = d ÷ t",
+      "category": "fisica"
+    },
+    {
+      "id": 37,
+      "natural": "La aceleración es igual al cambio de velocidad dividido por el tiempo",
+      "algebraic": "a = Δv ÷ t",
+      "category": "fisica"
+    },
+    {
+      "id": 38,
+      "natural": "La segunda ley de Newton: la fuerza es igual a la masa por la aceleración",
+      "algebraic": "F = m × a",
+      "category": "fisica"
+    },
+    {
+      "id": 39,
+      "natural": "La energía cinética es igual a un medio de la masa por la velocidad al cuadrado",
+      "algebraic": "Ec = ½ × m × v^2",
+      "category": "fisica"
+    },
+    {
+      "id": 40,
+      "natural": "La energía potencial gravitatoria es igual a la masa por la gravedad por la altura",
+      "algebraic": "Ep = m × g × h",
+      "category": "fisica"
+    },
+    {
+      "id": 41,
+      "natural": "El trabajo es igual a la fuerza por la distancia",
+      "algebraic": "W = F × d",
+      "category": "fisica"
+    },
+    {
+      "id": 42,
+      "natural": "La potencia es igual al trabajo dividido por el tiempo",
+      "algebraic": "P = W ÷ t",
+      "category": "fisica"
+    },
+    {
+      "id": 43,
+      "natural": "La ley de Hooke: la fuerza elástica es igual al resorte por la deformación",
+      "algebraic": "F = -k × x",
+      "category": "fisica"
+    },
+    {
+      "id": 44,
+      "natural": "La ley de la gravitación universal: la fuerza es igual a la constante por el producto de las masas dividido por el cuadrado de la distancia",
+      "algebraic": "F = G × (m1 × m2) ÷ r^2",
+      "category": "fisica"
+    },
+    {
+      "id": 45,
+      "natural": "La presión es igual a la fuerza dividida por el área",
+      "algebraic": "P = F ÷ A",
+      "category": "fisica"
+    },
+    {
+      "id": 46,
+      "natural": "La densidad es igual a la masa dividida por el volumen",
+      "algebraic": "ρ = m ÷ V",
+      "category": "fisica"
+    },
+    {
+      "id": 47,
+      "natural": "La ley de Ohm: el voltaje es igual a la corriente por la resistencia",
+      "algebraic": "V = I × R",
+      "category": "fisica"
+    },
+    {
+      "id": 48,
+      "natural": "La energía es igual a la potencia por el tiempo",
+      "algebraic": "E = P × t",
+      "category": "fisica"
+    },
+    {
+      "id": 49,
+      "natural": "La frecuencia es igual a uno dividido entre el período",
+      "algebraic": "f = 1 ÷ T",
+      "category": "fisica"
+    },
+    {
+      "id": 50,
+      "natural": "La velocidad de una onda es igual a la frecuencia por la longitud de onda",
+      "algebraic": "v = f × λ",
+      "category": "fisica"
+    },
+    {
+      "id": 51,
+      "natural": "La suma de las matrices {var1} y {var2}",
+      "algebraic": "{var1} + {var2}",
+      "category": "matrices"
+    },
+    {
+      "id": 52,
+      "natural": "La resta de las matrices {var1} y {var2}",
+      "algebraic": "{var1} - {var2}",
+      "category": "matrices"
+    },
+    {
+      "id": 53,
+      "natural": "El producto de la matriz {var1} por la matriz {var2}",
+      "algebraic": "{var1} × {var2}",
+      "category": "matrices"
+    },
+    {
+      "id": 54,
+      "natural": "La multiplicación de la matriz {var1} por el escalar {var2}",
+      "algebraic": "{var2} × {var1}",
+      "category": "matrices"
+    },
+    {
+      "id": 55,
+      "natural": "La transpuesta de la matriz {var1}",
+      "algebraic": "{var1}ᵗ",
+      "category": "matrices"
+    },
+    {
+      "id": 56,
+      "natural": "El determinante de la matriz {var1}",
+      "algebraic": "det({var1})",
+      "category": "matrices"
+    },
+    {
+      "id": 57,
+      "natural": "La inversa de la matriz {var1}",
+      "algebraic": "{var1}⁻¹",
+      "category": "matrices"
+    },
+    {
+      "id": 58,
+      "natural": "La matriz identidad de orden {var1}",
+      "algebraic": "I_{var1}",
+      "category": "matrices"
+    },
+    {
+      "id": 59,
+      "natural": "La matriz nula de dimensiones {var1} por {var2}",
+      "algebraic": "0_({var1}×{var2})",
+      "category": "matrices"
+    },
+    {
+      "id": 60,
+      "natural": "El sistema de ecuaciones representado por la matriz {var1}",
+      "algebraic": "{var1} → sistema AX = B",
+      "category": "matrices"
+    }
+  ]
+}
+ 
