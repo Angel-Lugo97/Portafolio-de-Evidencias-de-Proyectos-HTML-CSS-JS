@@ -28,7 +28,7 @@ El objetivo principal de esta tarea fue **acoplar múltiples proyectos `HTML + C
 
 ---
 
-```📂 Estructura del proyecto
+📂 Estructura del proyecto
 /
 ├─ index.html                → Página principal
 ├─ calculadoras_unificadas.js
