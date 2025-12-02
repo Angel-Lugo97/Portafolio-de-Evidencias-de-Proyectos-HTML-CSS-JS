@@ -1,43 +1,39 @@
-📘 Portafolio de Evidencias – Calculadoras Unificadas
-Tecnológico de Software
-Materia: Fundamentos de Álgebra
-Alumno: Ángel Abraham Lugo Sáenz
-Grupo: B
-Actividad #19 — Portafolio de Evidencias de Proyectos HTML/CSS/JS
-📚 Índice
-
-Objetivo del Proyecto
-
-Estructura del Proyecto
-
-Logros del Proyecto
-
-Unificación Visual y Estilo Global
-
-Por qué se utilizó tema_calculadorascss
-
-Integración de Calculadoras mediante iframes
-
-Animación Suave y Carga Dinámica
-
-Aprendizajes Clave
-
-Buenas Prácticas en Git
-
-Comentario Final
-
-🎯 Objetivo del Proyecto
-
-Este repositorio contiene la integración y visualización unificada de 7 calculadoras algebraicas, cada una desarrollada como parte de diferentes actividades de la materia Fundamentos de Álgebra.
-
-El objetivo principal fue reunir todas las calculadoras en una sola página (index.html), manteniendo sus funcionalidades originales y logrando una presentación profesional, uniforme y navegable, utilizando únicamente:
-HTML
-CSS
-JavaScript
+# 📘 Portafolio de Evidencias – Calculadoras Unificadas
+### Tecnológico de Software
+### Materia: Fundamentos de Álgebra
+### Alumno: Ángel Abraham Lugo Sáenz
+### Grupo: B
+# Actividad #19 — Portafolio de Evidencias de Proyectos HTML/CSS/JS
+## 📚 Índice
+```
+1- Objetivo del Proyecto
+2- Estructura del Proyecto
+3- Logros del Proyecto
+4- Unificación Visual y Estilo Global
+5- Explicación de IntersectionObserver
+6- Limpieza y Unificación de Calculadoras
+7- Documentación del CSS Global
+8- Integración de Calculadoras mediante iframes
+9- Animación Suave y Carga Dinámica
+10- Aprendizajes Clave
+11- Buenas Prácticas en Git
+12- Comentario Final
 
 ```
 
-📂 Estructura del Proyecto
+## 🎯 Objetivo del Proyecto
+
+Este repositorio contiene la integración y visualización unificada de 7 calculadoras algebraicas, cada una desarrollada como parte de diferentes actividades de la materia Fundamentos de Álgebra.
+El objetivo principal fue reunir todas las calculadoras en una sola página (index.html), manteniendo sus funcionalidades originales y logrando una presentación profesional, uniforme y navegable, utilizando únicamente:
+
+```
+HTML
+CSS
+JavaScript
+```
+
+## 📂 Estructura del Proyecto
+```
 /
 ├─ index.html                → Página principal que unifica todo
 ├─ calculadoras_unificadas.js
@@ -51,103 +47,126 @@ JavaScript
       ├─ 1B_A12_Angel_Lugo.html
       └─ 1B_A14_Angel_Lugo.html
       └─ tema_calculadoras.css   ← Estilo global que unifica todas las calculadoras
-
-```
-🚀 Logros del Proyecto
-
-✅ Unificación visual de 7 calculadoras algebraicas mediante iframes.
-
-✅ Todas las calculadoras muestran misma tipografía, colores y estilo base.
-
-✅ Se eliminaron animaciones RGB y fondos inconsistentes.
-
-✅ Navegación vertical suave con scroll-behavior.
-
-✅ Aparición animada de secciones con IntersectionObserver.
-
-✅ Diseño oscuro homogéneo basado en escala de grises.
-
-✅ Separación clara entre:
-
-Estilo global (fuera del iframe)
-
-Estilo unificador dentro del iframe
-
-🎨 Unificación Visual y Estilo Global
-
-Cada calculadora tenía inicialmente:
-
-Fuentes diferentes
-
-Colores distintos (morado, azul, degradados)
-
-Fondos animados RGB
-
-Botones personalizados
-
-Estilos que no combinaban entre sí
-
-Esto hacía que al integrarlas se vieran como 7 proyectos separados.
-
-✔ Solución
-
-Se creó un archivo especial dentro de /actividades llamado:
-
-```
-tema_calculadoras.css
 ```
 
-Este archivo contiene un tema oscuro global, con:
+## 🚀 Logros del Proyecto
 
-Tipografía única -> Arial, sans-serif
+```
+1- Integración visual de 7 calculadoras algebraicas mediante iframes.
+2- Todas las calculadoras muestran misma tipografía, colores y estilo base.
+3- Se eliminaron animaciones RGB y fondos inconsistentes.
+4- Navegación vertical suave con scroll-behavior.
+5- Aparición animada de secciones con IntersectionObserver.
+6- Diseño oscuro homogéneo basado en escala de grises.\
+7- Separación clara entre:
+8- Estilo global (fuera del iframe)
+9- Estilo unificador dentro del iframe
+10- Modularidad completa sin alterar la lógica original de ninguna calculadora.
+```
 
-Fondos unificados -> #111
+## 🎨 Unificación Visual y Estilo Global
 
-Inputs estilizados
-
+Cada calculadora tenía originalmente colores distintos, tipografías diferentes, gradientes, animaciones RGB e interfaces variadas.
+Para que todo luciera como un solo sistema coherente, se creó un tema visual uniforme basado en:
+```
+Tipografía global → Arial
+Fondo oscuro → #111
+Inputs estandarizados
 Botones uniformes
-
-Tablas estilizadas
-
-Controles visuales consistentes
-
-Eliminación de animaciones con:
-
+Eliminación de animaciones distractoras
 ```
+Este tema se aplicó dentro de cada iframe para asegurar consistencia visual completa.
+
+## 🔥 Explicación del IntersectionObserver (Animación de Aparición)
+
+La animación suave al hacer scroll se implementó con IntersectionObserver, una API moderna que detecta cuándo un elemento entra al viewport del usuario.
+
+### Código utilizado:
+```
+document.addEventListener("DOMContentLoaded", () => {
+  const containers = document.querySelectorAll(".calc-container");
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("visible");
+      }
+    });
+  }, { threshold: 0.15 });
+
+  containers.forEach(c => observer.observe(c));
+});
+```
+
+Esta técnica permite una navegación más fluida sin recargar el navegador.
+
+## 🌙 Proceso de Limpieza y Unificación de las Calculadoras
+
+Cada calculadora tenía su propio estilo, por lo que se realizó una limpieza de CSS en cada archivo:
+
+### Se eliminaron:
+```
+Colores personalizados
+Tipografías distintas
+Fondos RGB
+Degradados
+Sombra de colores
+Animaciones CSS
+Estilos globales conflictivos
+```
+### Se conservaron:
+```
+Layouts (grid, flex)
+Tamaños
+Márgenes
+Estructura interna
+```
+### Se agregó:
+```
+Un vínculo al tema global al final del <head>:
+
+<link rel="stylesheet" href="tema_calculadoras.css">
+```
+
+
+Esto unificó toda la estética sin afectar la lógica matemática.
+
+## 🖤 Documentación del CSS Global tema_calculadoras.css
+```
+Este archivo se encarga de:
+Aplicar tema oscuro uniforme
+Forzar misma tipografía
+Normalizar inputs y botones
+Eliminar animaciones
+Mantener un diseño profesional y coherente
+```
+###  Ejemplo de estilos clave:
+```
+body {
+  background: #111 !important;
+  color: #f0f0f0 !important;
+  font-family: Arial, sans-serif !important;
+}
+
+input, select, textarea {
+  background-color: #222 !important;
+  color: #fff !important;
+}
+
+button {
+  background: #fff !important;
+  color: #000 !important;
+}
+
 * {
   animation: none !important;
   transition: none !important;
 }
 ```
 
-El propósito fue que todas las calculadoras parecieran parte del mismo sistema profesional, sin importar cómo fueron creadas originalmente.
+## 🖥 Integración de Calculadoras mediante iframes
 
-🧩 Por qué se utilizó tema_calculadoras.css
-
-Los estilos del index.html NO pueden afectar el interior de los iframes, porque cada iframe carga su propio documento HTML.
-
-Para lograr coherencia visual, fue necesario inyectar un CSS global en cada calculadora, agregando esta línea al final del <head>:
-
-```
-<link rel="stylesheet" href="tema_calculadoras.css">
-```
-
-Colocarlo al final garantiza que:
-
-El estilo global override los estilos internos.
-
-Los colores personalizados de cada actividad sean reemplazados.
-
-Se eliminen fuentes personalizadas.
-
-Se estandarice la paleta oscura.
-
-De esta forma, cada calculadora mantiene su lógica, pero adopta la misma identidad visual.
-
-🖥 Integración de Calculadoras mediante iframes
-
-Las calculadoras se muestran dentro de contenedores uniformes con:
-
+### Cada calculadora se integra así:
 ```
 <section class="calc-container">
   <div class="calc-title">Recta Numérica</div>
@@ -158,89 +177,48 @@ Las calculadoras se muestran dentro de contenedores uniformes con:
 </section>
 ```
 
-Ventajas de usar iframes:
+Los iframes aseguran que la lógica interna de cada calculadora se mantenga aislada y sin conflictos.
 
-Aíslan el código de cada calculadora.
+## ✨ Animación Suave y Carga Dinámica
 
-Evitan conflictos de JavaScript y CSS.
+Se usó IntersectionObserver para activar la animación de entrada y mejorar la experiencia visual.
+Además, el JS principal registra cada iframe cuando termina de cargar para debugging si es necesario.
 
-Permiten mantener módulos independientes.
-
-Facilitan la integración de nuevos proyectos.
-
-✨ Animación Suave y Carga Dinámica
-
-Se implementó una animación de aparición:
+## 🧠 Aprendizajes Clave
 ```
-document.addEventListener("DOMContentLoaded", () => {
-  const containers = document.querySelectorAll(".calc-container");
-
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(e => e.isIntersecting && e.target.classList.add("visible"));
-  }, { threshold: 0.15 });
-
-  containers.forEach(c => observer.observe(c));
-});
+Integración modular con iframes
+Limpieza y unificación avanzada de CSS
+Implementación de tema global
+Manejo de animaciones eficientes
+Rutas relativas y estructura de carpetas
+Arquitectura visual profesional
+Debugging y estructura organizada de código
 ```
 
-Con esto, cada calculadora entra suavemente al viewport, generando una experiencia visual más moderna.
+## 🔧 Buenas Prácticas en Git
 
-🧠 Aprendizajes Clave
-
-Modularización y encapsulamiento de código.
-
-Integración segura con iframes.
-
-Unificación global de estilos dentro de documentos externos.
-
-Manejo de animaciones, scroll y diseño responsive.
-
-Gestión adecuada de rutas y carpetas.
-
-Limpieza de estilos internos conflictivos.
-
-Diseño UX/UI consistente.
-
-🔧 Buenas Prácticas en Git
-
-Durante el desarrollo se aplicaron comandos clave:
-
-Sincronizar historia:
+### Los comandos usados durante el proyecto incluyen:
 ```
 git pull --rebase
-```
-
-Añadir cambios:
-```
 git add .
-```
-
-Resolver conflictos en rebase:
-```
 git rebase --continue
-```
-
-Publicar actualización:
-```
 git push origin main
 ```
 
-Esto permitió mantener un historial limpio y evitar sobrescrituras.
+Esto ayudó a mantener un historial ordenado y resolver conflictos.
 
-🏁 Comentario Final
+## 🏁 Comentario Final
 
-Este proyecto no consistió únicamente en juntar calculadoras, sino en:
+Este proyecto no solo integra calculadoras:
+es una muestra de modularidad, diseño unificado, buenas prácticas web y documentación profesional.
 
-Comprender cómo integrarlas de manera modular
-
-Diseñar un sistema visual uniforme
-
-Resolver incompatibilidades estéticas
-
-Aplicar buenas prácticas de estructura
-
-Aprender técnicas modernas de animación y responsividad
-
-Practicar control de versiones con Git
-
-El resultado final es un portafolio profesional, navegable, limpio, funcional y escalable, donde todas las calculadoras forman parte de un único ecosistema visual coherente.
+### Se aplicó:
+```
+limpieza técnica
+arquitectura modular
+estilo global uniforme
+animaciones modernas
+control de versiones
+organización de contenido
+```
+El resultado es un portafolio funcional, elegante y escalable, ideal para mostrar como evidencia de aprendizaje y habilidades técnicas.
