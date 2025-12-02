@@ -3,7 +3,7 @@
 ### Materia: Fundamentos de Álgebra
 ### Alumno: Ángel Abraham Lugo Sáenz
 ### Grupo: B
-# Actividad #19 — Portafolio de Evidencias de Proyectos HTML/CSS/JS
+###  Actividad #19 — Portafolio de Evidencias de Proyectos HTML/CSS/JS
 ## 📚 Índice
 ```
 1- Objetivo del Proyecto
